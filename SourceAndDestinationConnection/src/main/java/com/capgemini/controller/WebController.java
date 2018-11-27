@@ -207,9 +207,10 @@ public class WebController {
 	}
 
 	@RequestMapping("/alltable")
-	public ModelAndView table(@ModelAttribute("table") Table table,@RequestParam("value")String value[],
+	public @ResponseBody JsonResponse table(@ModelAttribute("table") Table table,@RequestParam("value")String value[],
 			@RequestParam("destColumn")String destColumn[],Model model) {
 		JsonResponse response=new JsonResponse();
+		response.setValidated(true);
 		List<MappingInfo> srcColumLst = new ArrayList<MappingInfo>();
 		MappingInfo info=new MappingInfo();
 		Table[] table1=new Table[tableCount+1];
@@ -242,7 +243,8 @@ public class WebController {
 		System.out.println("END ");
 		System.out.println("Total Tables"+dataPump.getTables().length);
 		tableCount++;
-		return new ModelAndView("table");
+		//return new ModelAndView("table");
+		return response;
 	}
 	@RequestMapping("/closeConnection")
 	public ModelAndView closeFunction()

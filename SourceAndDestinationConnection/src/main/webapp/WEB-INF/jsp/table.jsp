@@ -30,13 +30,59 @@ text-align: center;
   width: 100%;
   height: 30px;
 } 
+span.error {
+	color: red;
+	margin-left: 10px;
+}
+
+.error {
+  color: red;
+  margin-left: 5px;
+}
+ 
+label.error {
+  display: inline;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
 	  $('#button').click(function(e) {
 		  e.preventDefault();
+		  var count=0;
+		  var sourceTable=$('#sourceTable').val();
+		  var destTable=$('#destTable').val();
+		  var forceMatch=$('#forceMatch').val();
+		  var sourceSchema=$('#sourceSchema').val();
+		  var destSchema=$('#destSchema').val();
+		  if (sourceTable.length < 1) {
+		      $('#sourceTable').after('<span class="error">This field is required</span>');
+		      count=1;
+		    }
+		  if (destTable.length < 1) {
+		      $('#destTable').after('<span class="error">This field is required</span>');
+		      count=1;
+		    }
+		  if (forceMatch.length < 1) {
+		      $('#forceMatch').after('<span class="error">This field is required</span>');
+		      count=1;
+		    }
+		  if (sourceSchema.length < 1) {
+		      $('#sourceSchema').after('<span  class="error">This field is required</span>');
+		      count=1;
+		    }
+		  if (destSchema.length < 1) {
+		      $('#destSchema').after('<span  class="error">This field is required</span>');
+		      count=1;
+		    }
+		  if(count==0)
+			  {
+			  $('.error').hide(); 
 		  columnFunction();
-		//  $('#column').show();
+		   }
+		  else
+			  {
+			  $('#button').removeAttr('disabled');
+			  }
 	  });
 });
 
@@ -66,17 +112,11 @@ function columnFunction() {
 						 $('#column').show();
 				for(var i=0;i<arr;i++)
 				 {
-					/* var row=' <input type="text" name="destColumn" id="'+columnname[i]+'" value="" />';
-					 $("#colAdd").append(row);
-					 document.getElementById(columnname[i]).value=columnname[i];
-					 var row1='<input type="text" name="value" id="value"/>';
-					 $('#colValue').append(row1); */
 					 var row='<tr><td><input type="text" name="destColumn" id="'+columnname[i]+'" value="" readonly="true"/></td></tr>';
 					 $("#colAdd").append(row);
 					 document.getElementById(columnname[i]).value=columnname[i];
 					 var row1='<tr><td><input type="text" name="value" id="value"/></td></tr>';
 					 $('#colValue').append(row1);
-				// alert(arr);
 				 }}
 				
 			}}
@@ -87,8 +127,9 @@ function columnFunction() {
 	var currProgress = 0;
 	var done = false;
 	var total = 100;
+	var num=0;
 	function startProgress() {
-
+		
 	var prBar = document.getElementById("prog");
 	var startButt = document.getElementById("startBtn");
 	var val = document.getElementById("numValue");
@@ -98,14 +139,31 @@ function columnFunction() {
 	currProgress++;
 	if(currProgress>100) done=true;
 	if(!done)
-		setTimeout("startProgress()", 100);
+		{
+		if(num==0)
+			{
+		$.ajax({
+			type : 'post',
+			url : 'alltable',
+			data : $('form[name="Table"]').serialize(),
+			success : function(response) {  
+				if (response.validated) {
+		         //alert("complete");
+				}
+			}
+		});
+		num=1;
+			}
+		setTimeout("startProgress()", 100);		
+		}
 	else
 	{
+		//document.getElementById("Table").submit();
 		document.getElementById("startBtn").disabled = false;
 		done = false;
 		currProgress = 0;
-		alert("Transferring records is Completed")
-		document.getElementById("Table").submit();
+		alert("Transferring records is Completed");
+		
 	}
 	}
 </script>
@@ -115,7 +173,7 @@ function columnFunction() {
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <body>
-<form:form id="Table" name="Table" action="alltable" modelAttribute="table" commandName="table">
+<form:form id="Table" name="Table" action="table.jsp" modelAttribute="table" commandName="table">
 <div class="container">
 <h1 >Table</h1>
 			<div class="form-group">
@@ -149,6 +207,7 @@ function columnFunction() {
 			</div>
 			<input id="startBtn" type="button" value="TRANSFER RECORDS" onclick="startProgress()" class="btn btn-success"/>			
 			<input type="submit" value="CLOSE" formaction="closeConnection" class="btn btn-success"/>
+			<input type="submit" value="NEW" formaction="table" class="btn btn-success"/>	
 				</div>
                 <progress id="prog" value="0" max="100"></progress>					
 				<div id="numValue"align="center">0%</div>

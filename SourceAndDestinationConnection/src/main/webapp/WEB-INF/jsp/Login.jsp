@@ -53,6 +53,7 @@ label.error {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	var num=0;
 	  $('#sourceTable').submit(function(e) {
 	    e.preventDefault();
 	    var count=0;
@@ -72,10 +73,13 @@ $(document).ready(function() {
 	    if(count==0)
 	    	{
 	    	sourceFunction();
+	    	num=1;
 	    	}
 	  });
 	  $('#destinationTable').submit(function(e) {
 		    e.preventDefault();
+		    if(num==1)
+		    {
 		    var count=0;
 		    var userId = $('#DuserId').val();
 		    var password = $('#Dpassword').val();
@@ -93,8 +97,28 @@ $(document).ready(function() {
 		    if(count==0)
 		    	{
 		    	DestinationFunction();
+		    	num=2;
+		    	}
+		    }
+		    else
+		    	{
+		    	alert("Please Connect Source database");
 		    	}
 		  });
+	  $('#table').submit(function(e) {
+		    e.preventDefault();
+		    if(num==2)
+		    	{
+		    	document.getElementById("table").submit();
+		    	}
+		    else
+		    	{
+		    	if(num==1)
+		    	alert("Please connect destination database")
+		    	else if(num==0)
+		    	alert("please connect source and destination database");
+		    	}
+	  });
 
 	});
 	function sourceFunction() {
