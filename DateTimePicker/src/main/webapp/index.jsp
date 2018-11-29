@@ -22,8 +22,9 @@
 
 <script>
 	$(function() {
-		
+		 
 		$("#datetimepicker1").daterangepicker({
+			minDate: new Date().toLocaleString("en-US", {timeZone: "America/New_York"}),
 			singleDatePicker : true,
 			showDropdowns : true,
 			timePicker : true,
@@ -62,8 +63,7 @@
 	$(document).ready(function() {
 		$("#datetimepicker1").val("");
 	    $("#datetimepicker2").val(""); 
-        $('#date').submit(function(e){
-        	
+        $('#date').submit(function(e){      	
 		e.preventDefault();
 		var count=0;
 		 var datetimepicker1 = $('#datetimepicker1').val();
@@ -90,6 +90,7 @@
         var enddate= $("#datetimepicker2").val();
         startdate=new Date(startdate);
         enddate=new Date(enddate);
+        
         var fromDate=moment(startdate,'DD/MM/YYYY');
         var toDate=moment(enddate,'DD/MM/YYYY');
         var daysDiff=toDate.diff(fromDate,'days');
@@ -145,8 +146,8 @@
 	});
 </script>
 <body>
-   <form id="date">
-		Start Date:<br> <input type="text" id="datetimepicker1" class="field left" readonly ><br>
+   <form id="date" action="value">
+		Start Date:<br> <input type="text" id="datetimepicker1" name="datetimepicker1" class="field left" readonly ><br>
 		End Date: <br> <input type="text" id="datetimepicker2" class="field left" readonly ><br>
 	   <br><input type="submit" value="Submit">
 	 </form>
