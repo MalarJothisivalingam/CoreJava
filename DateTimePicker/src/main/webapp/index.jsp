@@ -2,11 +2,13 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head></head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <style type="text/css">
-
+#datetimepicker3 {
+    pointer-events: none;
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -18,13 +20,10 @@
 	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-
 <script>
 	$(function() {
-		 
 		$("#datetimepicker1").daterangepicker({
-			minDate: new Date().toLocaleString("en-US", {timeZone: "America/New_York"}),
+			//minDate: new Date().toLocaleString("en-US", {timeZone: "America/New_York"}),
 			singleDatePicker : true,
 			showDropdowns : true,
 			timePicker : true,
@@ -36,6 +35,30 @@
 			}
 		});
 		$("#datetimepicker2").daterangepicker({
+			
+			singleDatePicker : true,
+			showDropdowns : true,
+			timePicker : true,
+			timePicker24Hour : true,
+			autoUpdateInput: false,
+			locale : {
+				format : 'MM/DD/YYYY H:mm',
+					cancelLabel: 'Clear'
+			}
+		});
+        $("#datetimepicker3").daterangepicker({
+			singleDatePicker : true,
+			showDropdowns : true,
+			timePicker : true,
+			timePicker24Hour : true,
+			autoUpdateInput: false,
+			locale : {
+				format : 'MM/DD/YYYY H:mm',
+					cancelLabel: 'Clear'
+			}
+		});
+$("#datetimepicker4").daterangepicker({
+			
 			singleDatePicker : true,
 			showDropdowns : true,
 			timePicker : true,
@@ -58,16 +81,23 @@
 		 $("#datetimepicker2").on('cancel.daterangepicker', function(ev, picker) {
 		      $(this).val('');
 		  });
-
+		 $("#datetimepicker4").on('apply.daterangepicker', function(ev, picker) {
+		      $(this).val(picker.endDate.format('MM/DD/YYYY H:mm'));
+		  });
+		 $("#datetimepicker4").on('cancel.daterangepicker', function(ev, picker) {
+		      $(this).val('');
+		  });
+		 
 	});
 	$(document).ready(function() {
 		$("#datetimepicker1").val("");
-	    $("#datetimepicker2").val(""); 
-        $('#date').submit(function(e){      	
+	    $("#datetimepicker2").val("");
+        $('#date').submit(function(e){ 
 		e.preventDefault();
 		var count=0;
 		 var datetimepicker1 = $('#datetimepicker1').val();
 		 var datetimepicker2 =$('#datetimepicker2').val();
+		 $('#datetimepicker3').val(datetimepicker1);
 		 if(datetimepicker1.length < 1 && datetimepicker2.length < 1)
 		 {
 		 alert("Both field should not be empty");
@@ -85,7 +115,8 @@
 			 }
 		  
 	  if(count==0)
-	  {			
+	  {	
+		  
         var startdate= $("#datetimepicker1").val();
         var enddate= $("#datetimepicker2").val();
         startdate=new Date(startdate);
@@ -110,12 +141,12 @@
            if(HH<4 && HH>=0)
            	{
            	alert("success");
-           	document.getElementById("date").submit()
+          	document.getElementById("date").submit()
            	}
            else if(HH==4 && MM==0)
            	{
-           	alert("success");                	
-           	document.getElementById("date").submit()
+           	alert("success");     
+           document.getElementById("date").submit()
            	}
            else if(HH<0)
            	{
@@ -148,10 +179,11 @@
 <body>
    <form id="date" action="value">
 		Start Date:<br> <input type="text" id="datetimepicker1" name="datetimepicker1" class="field left" readonly ><br>
-		End Date: <br> <input type="text" id="datetimepicker2" class="field left" readonly ><br>
+		End Date: <br> <input type="text" id="datetimepicker2" name="datetimepicker2" class="field left" readonly ><br><br>
+		Demo Start Date <input type="text" id="datetimepicker3"  name="datetimepicker3" class="field left" readonly>
+		Demo Date <input type="text" id="datetimepicker4" name="datetimepicker4" class="field left" ><br>
 	   <br><input type="submit" value="Submit">
 	 </form>
+	 <a href="time">Time</a>
 </body>
 </html>
-
-
