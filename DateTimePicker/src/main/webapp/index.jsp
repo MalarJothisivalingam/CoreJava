@@ -23,7 +23,7 @@
 <script>
 	$(function() {
 		$("#datetimepicker1").daterangepicker({
-			//minDate: new Date().toLocaleString("en-US", {timeZone: "America/New_York"}),
+			minDate: new Date().toLocaleString("en-US", {timeZone: "America/New_York"}),
 			singleDatePicker : true,
 			showDropdowns : true,
 			timePicker : true,
@@ -57,7 +57,7 @@
 					cancelLabel: 'Clear'
 			}
 		});
-$("#datetimepicker4").daterangepicker({
+        $("#datetimepicker4").daterangepicker({
 			
 			singleDatePicker : true,
 			showDropdowns : true,
