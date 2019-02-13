@@ -10,6 +10,7 @@ public class JsonResponse {
 	private boolean validated;
 	private List<String> colName;
 	private String error;
+	
 	public boolean isValidated() {
 		return validated;
 	}

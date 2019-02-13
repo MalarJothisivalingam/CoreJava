@@ -38,6 +38,7 @@
     <version>20090211</version>
 </dependency>
 
+
     <!-- Jackson API -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -90,6 +91,12 @@
     <version>1.4.197</version>
     <scope>runtime</scope>
 </dependency>
+<dependency>
+        <groupId>com.oracle</groupId>
+        <artifactId>ojdbc6_g</artifactId>
+        <version>11.2.0.3</version>
+    </dependency>
+
   </dependencies>
 
   <build>

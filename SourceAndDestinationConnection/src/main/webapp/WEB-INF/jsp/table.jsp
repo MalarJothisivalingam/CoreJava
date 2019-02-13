@@ -179,20 +179,23 @@ function columnFunction() {
 			<div class="form-group">
 	<label for="sourceTable">Source Table</label> <input type="text" class="form-control" name="sourceTable" id="sourceTable"  placeholder="Enter Source Table"/>
 			</div>
-<div class="form-group">
-	<label for="destTable">Destination Table</label> <input type="text" class="form-control" name="destTable" placeholder="Enter Destination Table" id="destTable" />
-			</div>
-	<div class="form-group">
-		<label for="forceMatch">Force Match</label> 
-		<input type="text" class="form-control" name="forceMatch" placeholder="Enter Force Match" id="forceMatch" />
-			</div>
 			<div class="form-group">
 				<label for="">Source Schema</label> <input type="text" class="form-control" name="sourceSchema" placeholder="Enter Source schema" id="sourceSchema" />
+			</div>
+<div class="form-group">
+	<label for="destTable">Destination Table</label> <input type="text" class="form-control" name="destTable" placeholder="Enter Destination Table" id="destTable" />
 			</div>
 			<div class="form-group">
 				<label for="destSchema">Destination Schema</label> <input type="text" class="form-control"
 					name="destSchema" placeholder="Enter Destination Schema" id="destSchema" />
 			</div>
+	<div class="form-group">
+		<label for="forceMatch">Force Match</label> 
+		<br><input type="radio" name="forceMatch" id="forceMatch" value="true"/> True  <input type="radio" name="forceMatch" id="forceMatch" value="false"/>  False<br>
+		<!-- <input type="text" class="form-control" name="forceMatch" placeholder="Enter Force Match" id="forceMatch" /> -->
+			</div>
+			
+			
 				<button id="button" name="button" class="btn btn-primary" onclick="this.disabled = 'disabled';">To Add Column</button>
 			
 			<div id="column" style="display: none;">

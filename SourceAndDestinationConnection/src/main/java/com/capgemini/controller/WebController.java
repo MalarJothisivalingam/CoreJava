@@ -54,8 +54,8 @@ public class WebController {
 		}
 		else if(selectSource.equals("Oracle"))
 		{
-			SrcConnect.setDriverName("");
-			 SrcConnect.setConnectionURL("");
+			 SrcConnect.setDriverName("oracle.jdbc.driver.OracleDriver");
+			 SrcConnect.setConnectionURL("jdbc:oracle:thin:@localhost:1521:xe");
 		}
 		else if(selectSource.equals("MYSQL"))
 		{
@@ -79,8 +79,8 @@ public class WebController {
 	     }
 		else if(selectDestination.equals("Oracle"))
 		{
-			 DestConnect.setDriverName("");
-			 DestConnect.setConnectionURL("");
+			 DestConnect.setDriverName("oracle.jdbc.driver.OracleDriver");
+			 DestConnect.setConnectionURL("jdbc:oracle:thin:@localhost:1521:xe");
 		}
 		else if(selectDestination.equals("MYSQL"))
 		{
